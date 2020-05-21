@@ -20,13 +20,10 @@ def read_lines(path, col_sep=None):
 
 
 def extract_sentence(train_x_seg_path, train_y_seg_path, test_seg_path):
-    ret = []
     lines = read_lines(train_x_seg_path)
     lines += read_lines(train_y_seg_path)
     lines += read_lines(test_seg_path)
-    for line in lines:
-        ret.append(line)
-    return ret
+    return lines
 
 
 def save_sentence(lines, sentence_path):
@@ -47,6 +44,7 @@ def build(train_x_seg_path, test_y_seg_path, test_seg_path, out_path=None, sente
     your code
     w2v = （one line）
     """
+    w2v = Word2Vec([sentence.split(' ') for sentence in sentences], size=256, window=5, sg=1)
     w2v.wv.save_word2vec_format(w2v_bin_path, binary=True)
     print("save %s ok." % w2v_bin_path)
     # test
