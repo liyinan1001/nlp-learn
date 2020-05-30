@@ -1,7 +1,7 @@
 import tensorflow as tf
 from seq2seq_tf2.encoders import rnn_encoder
 from seq2seq_tf2.decoders import rnn_decoder
-from utils.data_utils import load_word2vec
+from seq2seq_tf2.utils.data_utils import load_word2vec
 import time
 
 
@@ -41,6 +41,12 @@ class SequenceToSequence(tf.keras.Model):
             your code
             如：xxx = self.decoder(), 采用Teachering Forcing方法
             """
+            _, pred, dec_hidden = self.decoder(tf.expand_dims(dec_inp[:, t], 1),
+                                                dec_hidden,
+                                                enc_output,
+                                                context_vector
+                                                )
+
             context_vector, attn_dist = self.attention(dec_hidden, enc_output)
             
             predictions.append(pred)

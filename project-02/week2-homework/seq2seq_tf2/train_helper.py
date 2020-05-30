@@ -51,8 +51,8 @@ def train_model(model, dataset, params, ckpt, ckpt_manager):
         step = 0
         total_loss = 0
         # for step, batch in enumerate(dataset.take(params['steps_per_epoch'])):
-        for batch in dataset:
-        # for batch in dataset.take(params['steps_per_epoch']):
+        #for batch in dataset:
+        for batch in dataset.take(params['steps_per_epoch']):  # test using sample data
             loss = train_step(batch[0]["enc_input"],  # shape=(16, 200)
                               batch[1]["dec_target"], # shape=(16, 50)
                               batch[1]["dec_input"])
