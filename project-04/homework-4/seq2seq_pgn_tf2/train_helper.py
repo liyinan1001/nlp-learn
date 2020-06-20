@@ -57,7 +57,7 @@ def train_model(model, dataset, params, ckpt, ckpt_manager):
 
             step += 1
             total_loss += loss
-            if step % 100 == 0:
+            if step % 2 == 0:
                 print('Epoch {} Batch {} Loss {:.4f}'.format(epoch + 1, step, total_loss / step))
                 # print('Epoch {} Batch {} Loss {:.4f}'.format(epoch + 1, step, loss.numpy()))
 
